@@ -3,10 +3,9 @@ import { clean } from 'esbuild-plugin-clean';
 import esbuild from 'esbuild';
 
 esbuild.build({
-	entryPoints: ['src/*'],
+	entryPoints: ['src/**/*'],
 	outdir: 'dist',
-
-	// plugins: [GasPlugin],
+	minify: true,
 	keepNames: true,
 	plugins: [
 		clean({
