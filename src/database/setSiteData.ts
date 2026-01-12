@@ -13,7 +13,7 @@ export function setSiteData(range: GoogleAppsScript.Spreadsheet.Range) {
 
   for (let key of keys) {
     if (key === "Domain") continue;
-    data[0].push(parsed[domain]?.[key] || "");
+    data[0].push(parsed[domain].value?.[key] || "");
   }
   const newRange = _active.getRange(range.getRow(), 1, 1, data[0].length);
   newRange.setValues(data);

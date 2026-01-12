@@ -1,24 +1,26 @@
+import { updateObject } from "../utils/updateObject";
 import { _active, _sites } from "./config";
 import { getKeys } from "./getKeys";
+import { parseRow } from "./parseRow";
 import { parseTable } from "./parseTable";
 
 export function updateDataBase(range: GoogleAppsScript.Spreadsheet.Range) {
   if (!_sites) return;
-  const parsed = parseTable({ sheet: _sites, keyRow: 1 });
-  if (!parsed) return;
 
-  const rangeKeys = getKeys({ sheet: _active, keyRow: 2 });
-  if (!rangeKeys) return;
-  const row = _active.getRange(range.getRow(), 1, 1, range.getLastColumn()).getValues()[0];
-  const parsedRow: { [key: string]: string } = {};
+  const parsedRow = parseRow(range);
+  if (!parsedRow) return;
 
-  for (let i = 0; i < rangeKeys.length; i++) {
-    parsedRow[rangeKeys[i]] = row[i] || "";
-  }
+  const domain = parsedRow.Domain;
+  if (!domain) return;
 
-  if (!parsedRow["Domain"]) return;
-  const newValues = { ...parsed[parsedRow["Domain"]] };
-  const dbRange = _sites.getRange(+parsed[parsedRow["Domain"]]["id"], 1, 1, Object.keys(parsed).length);
+  const parsedTable = parseTable({ sheet: _sites, keyRow: 1 });
+  if (!parsedTable || !parsedTable[domain]) return;
 
-  console.log(parsedRow);
+  const newValues = updateObject(parsedTable[domain].value, parsedRow);
+
+  const newValuerArr = Object.keys(parsedTable[domain].value).map((key) => newValues[key]);
+
+  const dbRange = _sites.getRange(+parsedTable[domain].id + 1, 1, 1, newValuerArr.length);
+
+  dbRange.setValues([newValuerArr]);
 }
