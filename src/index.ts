@@ -1,4 +1,5 @@
 import * as database from "./database";
+import { refresh } from "./database";
 import { filterCols } from "./filter/filterCols";
 import { filterRows } from "./filter/filterRows";
 import { insertColumns } from "./insert/insertCols";
@@ -26,6 +27,7 @@ function onOpen() {
   insert.addItem("Insert columns", "insertColumns").addItem("Insert rows", "insertRows");
 
   menu
+    .addItem("Refresh", "refresh")
     .addItem("Change orientation", "changeOrientation")
     .addSubMenu(text)
     .addSubMenu(link)
@@ -41,6 +43,7 @@ function onOpen() {
   textTrim,
   linkFormat,
   rotate,
+  refresh,
   insertColumns,
   insertRows,
   filterRows,

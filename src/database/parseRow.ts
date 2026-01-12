@@ -14,7 +14,5 @@ export function parseRow(range: GoogleAppsScript.Spreadsheet.Range) {
     }
     parsedRow[rangeKeys[i]] = row[i] || "";
   }
-
-  console.log(parsedRow);
   return parsedRow;
 }

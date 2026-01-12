@@ -15,7 +15,6 @@ export function filterRows() {
           .getRange(range.getRow() + i, range.getColumn(), 1, sheet.getLastColumn())
           .getValues();
         newValues.push(row[0]);
-        console.log(newValues);
       }
     }
   }
