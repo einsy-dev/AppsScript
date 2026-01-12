@@ -3,13 +3,13 @@
  * @param {string} url to parse.
  * @return domain.
  * @customfunction
+ * @preserve
  */
-function DOMAIN(url: string): string | null {
+export function DOMAIN(url: string): string | null {
   if (url.match("https?")) {
     url = url.replace("https?", "https");
   } else {
     url = "https://" + url;
   }
-
   return url.split("/")[2];
 }

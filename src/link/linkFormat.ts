@@ -1,4 +1,6 @@
-function linkFormat() {
+import { parseDomain } from "../utils/parseDomain";
+
+export function linkFormat() {
   const sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
   const range = sheet.getActiveRange();
   if (!range) return;

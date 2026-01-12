@@ -1,4 +1,4 @@
-function insertColumns() {
+export function insertColumns() {
   let sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
   let col = sheet.getActiveRange()?.getColumn();
   if (!col) return;

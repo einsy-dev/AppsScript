@@ -1,1 +1,1 @@
-function filterCols() {}
+export function filterCols() {}

@@ -1,4 +1,4 @@
-function textIn() {
+export function textIn() {
   const sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
   const range = sheet.getActiveRange();
   if (!range) return;

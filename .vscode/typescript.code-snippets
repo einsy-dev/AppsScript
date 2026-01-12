@@ -1,0 +1,12 @@
+{
+  "sheet": {
+    "prefix": [
+      "sheet"
+    ],
+    "body": [
+      "const sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();"
+    ],
+    "description": "",
+    "scope": "typescript, typescriptreact"
+  }
+}

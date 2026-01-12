@@ -1,4 +1,4 @@
-function insertRows() {
+export function insertRows() {
   let sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
   let row = sheet.getActiveRange()?.getRow();
   if (!row) return;

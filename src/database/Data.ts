@@ -1,3 +1,0 @@
-function markBadSites() {}
-
-function markSavedSites() {}

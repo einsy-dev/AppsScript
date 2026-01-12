@@ -1,4 +1,4 @@
-function textTrim() {
+export function textTrim() {
   const sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
   const range = sheet.getActiveRange();
   if (!range) return;
