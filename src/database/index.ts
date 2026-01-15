@@ -34,7 +34,7 @@ export function updateRange() {
     return;
   }
   const data = new Values({ range, keyRow: 2, keyCol: 1 });
-  _sitesValues.update(data, { create: true });
+  _sitesValues.update(data, { create: true, preserve: true });
 }
 
 export function onDomainChange({ range }: GoogleAppsScript.Events.SheetsOnEdit) {
@@ -53,6 +53,6 @@ export function onDomainChange({ range }: GoogleAppsScript.Events.SheetsOnEdit) 
   if (range.getColumn() === 1) {
     data.update(_sitesValues, { clear: true });
   } else {
-    _sitesValues.update(data, { create: true });
+    _sitesValues.update(data, { create: true, preserve: true });
   }
 }
