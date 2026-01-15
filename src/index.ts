@@ -1,5 +1,5 @@
 import * as database from "./database";
-import { refresh } from "./database";
+import { refresh, refreshRange, updateRange } from "./database";
 import { filterCols } from "./filter/filterCols";
 import { filterRows } from "./filter/filterRows";
 import { insertColumns } from "./insert/insertCols";
@@ -28,6 +28,8 @@ function onOpen() {
 
   menu
     .addItem("Refresh", "refresh")
+    .addItem("Refresh range", "refreshRange")
+    .addItem("Update range", "updateRange")
     .addItem("Change orientation", "changeOrientation")
     .addSubMenu(text)
     .addSubMenu(link)
@@ -44,6 +46,8 @@ function onOpen() {
   linkFormat,
   rotate,
   refresh,
+  refreshRange,
+  updateRange,
   insertColumns,
   insertRows,
   filterRows,

@@ -1,8 +1,9 @@
+import { _active } from "../config";
+
 export function insertColumns() {
-  let sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
-  let col = sheet.getActiveRange()?.getColumn();
+  let col = _active.getActiveRange()?.getColumn();
   if (!col) return;
   let count = SpreadsheetApp.getUi().prompt("How many columns").getResponseText();
   if (!count) return;
-  sheet.insertColumnsAfter(col, +count);
+  _active.insertColumnsAfter(col, +count);
 }

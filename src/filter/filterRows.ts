@@ -1,28 +1,26 @@
+import { _active } from "../config";
+
 export function filterRows() {
-  const sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
-  const range = sheet.getActiveRange();
-  if (!range) return;
-  const selected = range.getValues();
-  const uniqueSet = new Set<{ [key: string]: string }>();
-  const newValues: string[][] = [];
+  const activeRange = _active.getActiveRange();
+  if (!activeRange) return;
 
-  for (let i = 0; i < selected.length; i++) {
-    for (let j = 0; j < selected[i].length; j++) {
-      const value = selected[i][j];
-      if (value.trim() !== "" && !uniqueSet.has(value)) {
-        uniqueSet.add(value);
-        let row: string[][] = sheet
-          .getRange(range.getRow() + i, range.getColumn(), 1, sheet.getLastColumn())
-          .getValues();
-        newValues.push(row[0]);
-      }
+  const [row, col] = [activeRange.getRow(), activeRange.getColumn()];
+  const rows = _active.getRange(row, 1, activeRange.getNumRows(), _active.getLastColumn());
+  let rowsValues: string[][] = rows.getValues();
+
+  const uniqueSet = new Set<string>();
+  rowsValues = rowsValues.filter((val) => {
+    const value: string = val[col - 1].trim();
+    if (value !== "" && !uniqueSet.has(value)) {
+      uniqueSet.add(value);
+      return true;
+    } else {
+      return false;
     }
-  }
+  });
 
-  const [row, col] = [range.getRow(), range.getColumn()];
-  const rangeToClear = sheet.getRange(row, col, range.getLastRow(), sheet.getLastColumn());
-  rangeToClear.clearContent();
-  const newRange = sheet.getRange(row, col, newValues.length, newValues[0].length);
-  newRange.setValues(newValues);
+  rows.clearContent();
+  const newRange = _active.getRange(row, 1, rowsValues.length, rowsValues[0].length);
+  newRange.setValues(rowsValues);
   newRange.activate();
 }

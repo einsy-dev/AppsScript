@@ -1,8 +1,9 @@
+import { _active } from "../config";
+
 export function insertRows() {
-  let sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
-  let row = sheet.getActiveRange()?.getRow();
+  let row = _active.getActiveRange()?.getRow();
   if (!row) return;
   let count = SpreadsheetApp.getUi().prompt("How many rows").getResponseText();
   if (!count) return;
-  sheet.insertRowsAfter(row, +count);
+  _active.insertRowsAfter(row, +count);
 }

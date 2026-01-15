@@ -1,6 +1,7 @@
+import { _active } from "../config";
+
 export function rotate() {
-  const sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
-  const range = sheet.getActiveRange();
+  const range = _active.getActiveRange();
   if (!range) return;
   const selected: string[][] = range.getValues();
   const [col, row] = [range.getColumn(), range.getRow()];
@@ -14,7 +15,7 @@ export function rotate() {
     }
   }
 
-  let newRange = sheet.getRange(row, col, res.length, res[0].length);
+  let newRange = _active.getRange(row, col, res.length, res[0].length);
   range.clearContent();
   newRange.setValues(res);
   newRange.activate();

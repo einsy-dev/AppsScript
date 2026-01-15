@@ -7,7 +7,9 @@ esbuild.build({
 	entryPoints: ['src/index.ts', 'src/functions/index.ts'],
 	outdir: 'dist',
 	format: 'cjs',
+	target: 'es2019',
 	bundle: true,
+	keepNames: true,
 	treeShaking: false,
 	legalComments: 'inline',
 	plugins: [
