@@ -89,10 +89,10 @@ export class Values {
 
     if (Array.isArray(row)) {
       for (let el of row) {
-        this.values[el][col] = !value && preserve ? this.values[el][col] : value;
+        this.values[el][col] = String(value) == "" && preserve ? this.values[el][col] : value;
       }
     } else {
-      this.values[row][col] = !value && preserve ? this.values[row][col] : value;
+      this.values[row][col] = String(value) == "" && preserve ? this.values[row][col] : value;
     }
   }
 

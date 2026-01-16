@@ -1,5 +1,4 @@
 import * as database from "./database";
-import { refresh, refreshRange, updateRange } from "./database";
 import { filterCols } from "./filter/filterCols";
 import { filterRows } from "./filter/filterRows";
 import { insertColumns } from "./insert/insertCols";
@@ -30,12 +29,18 @@ function onOpen() {
     .addItem("Refresh", "refresh")
     .addItem("Refresh range", "refreshRange")
     .addItem("Update range", "updateRange")
+    .addItem("Reset range", "resetRange")
     .addItem("Change orientation", "changeOrientation")
     .addSubMenu(text)
     .addSubMenu(link)
     .addSubMenu(insert)
     .addSubMenu(filter)
     .addToUi();
+
+  if (!ScriptApp.getProjectTriggers().some((t) => t.getHandlerFunction() == "editTrigger")) {
+    ScriptApp.newTrigger("editTrigger").forSpreadsheet(SpreadsheetApp.getActiveSpreadsheet()).onEdit().create();
+    console.log("trigger added");
+  }
 }
 
 (globalThis as any) = {
@@ -45,9 +50,6 @@ function onOpen() {
   textTrim,
   linkFormat,
   rotate,
-  refresh,
-  refreshRange,
-  updateRange,
   insertColumns,
   insertRows,
   filterRows,
